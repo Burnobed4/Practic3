@@ -1,0 +1,9 @@
+fintracker/
+    __init__.py
+    models.py
+    storage.py
+    report.py
+    commands.py
+main.py
+requirements.txt
+data.json
