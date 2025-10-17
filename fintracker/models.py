@@ -21,19 +21,19 @@ class Expense:
         self.description = description
         self.date = date or datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        def to_dict(self):
-            return {
-                "category": self.category,
-                "amount": self.amount,
-                "description": self.description,
-                "date": self.date
-            }
+    def to_dict(self):
+        return {
+            "category": self.category,
+            "amount": self.amount,
+            "description": self.description,
+            "date": self.date
+        }
 
-        @classmethod
-        def from_dict(cls, data):
-            return cls(
-                data['category'],
-                data['amount'],
-                data.get['description', ""],
-                data.get("date")
-            )
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            data['category'],
+            data['amount'],
+            data.get['description', ""],
+            data.get("date")
+        )
