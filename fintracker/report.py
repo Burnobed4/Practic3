@@ -1,3 +1,8 @@
+"""Модуль для генерации финансовых отчетов.
+
+Предоставляет функции для создания отчетов по категориям и периодам.
+"""
+
 import csv
 from datetime import datetime
 from typing import List, Dict
@@ -5,6 +10,17 @@ from .storage import get_expenses, get_categories
 
 
 def generate_category_report(period: str = "month", output_file: str = None) -> Dict:
+    """Генерирует отчет по категориям за указанный период.
+
+    Args:
+        period (str, optional): Период для отчета.
+            Допустимые значения: 'today', 'month', 'all'. По умолчанию 'month'.
+        output_file (str, optional): Путь для сохранения отчета в CSV.
+            По умолчанию None.
+
+    Returns:
+        Dict: Словарь с данными отчета.
+    """
     expenses = get_expenses(period)
 
     # Группируем по категориям
@@ -32,6 +48,17 @@ def generate_category_report(period: str = "month", output_file: str = None) -> 
 
 
 def generate_period_report(start_date: str, end_date: str, output_file: str = None) -> Dict:
+    """Генерирует отчет за указанный период времени.
+
+    Args:
+        start_date (str): Начальная дата в формате YYYY-MM-DD.
+        end_date (str): Конечная дата в формате YYYY-MM-DD.
+        output_file (str, optional): Путь для сохранения отчета в CSV.
+            По умолчанию None.
+
+    Returns:
+        Dict: Словарь с данными отчета.
+    """
     all_expenses = get_expenses("all")
 
     # Фильтруем по дате
@@ -64,6 +91,15 @@ def generate_period_report(start_date: str, end_date: str, output_file: str = No
 
 
 def save_report_to_csv(report: Dict, filename: str):
+    """Сохраняет отчет в CSV файл.
+
+    Args:
+        report (Dict): Данные отчета.
+        filename (str): Имя файла для сохранения.
+
+    Raises:
+        IOError: Если возникает ошибка при записи файла.
+    """
     try:
         with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
@@ -90,6 +126,11 @@ def save_report_to_csv(report: Dict, filename: str):
 
 
 def print_report(report: Dict):
+    """Выводит отчет в консоль в читаемом формате.
+
+    Args:
+        report (Dict): Данные отчета для вывода.
+    """
     print(f"\n=== ФИНАНСОВЫЙ ОТЧЕТ ===")
     print(f"Период: {report['period']}")
     print(f"Операций: {report['total_expenses']}")

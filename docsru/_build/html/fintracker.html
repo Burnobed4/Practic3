@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Пакет fintracker &mdash; документация Financial Tracker 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e35015f7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=cd1d70c9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Руководство пользователя" href="usage.html" />
+    <link rel="prev" title="Модули проекта" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Financial Tracker
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Модули проекта</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Пакет fintracker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Подмодули</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-fintracker.models">fintracker.models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.models.Category"><code class="docutils literal notranslate"><span class="pre">Category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.models.Expense"><code class="docutils literal notranslate"><span class="pre">Expense</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-fintracker.storage">fintracker.storage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.storage.add_category"><code class="docutils literal notranslate"><span class="pre">add_category()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.storage.add_expense"><code class="docutils literal notranslate"><span class="pre">add_expense()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.storage.get_categories"><code class="docutils literal notranslate"><span class="pre">get_categories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.storage.get_expenses"><code class="docutils literal notranslate"><span class="pre">get_expenses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.storage.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.storage.save_data"><code class="docutils literal notranslate"><span class="pre">save_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-fintracker.commands">fintracker.commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.commands.handle_add"><code class="docutils literal notranslate"><span class="pre">handle_add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.commands.handle_category"><code class="docutils literal notranslate"><span class="pre">handle_category()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.commands.handle_list"><code class="docutils literal notranslate"><span class="pre">handle_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.commands.handle_report"><code class="docutils literal notranslate"><span class="pre">handle_report()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.commands.setup_commands"><code class="docutils literal notranslate"><span class="pre">setup_commands()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-fintracker.report">fintracker.report</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.report.generate_category_report"><code class="docutils literal notranslate"><span class="pre">generate_category_report()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.report.generate_period_report"><code class="docutils literal notranslate"><span class="pre">generate_period_report()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.report.print_report"><code class="docutils literal notranslate"><span class="pre">print_report()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fintracker.report.save_report_to_csv"><code class="docutils literal notranslate"><span class="pre">save_report_to_csv()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Руководство пользователя</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Financial Tracker</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Модули проекта</a></li>
+      <li class="breadcrumb-item active">Пакет fintracker</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/fintracker.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-fintracker">
+<span id="fintracker"></span><h1>Пакет fintracker<a class="headerlink" href="#module-fintracker" title="Ссылка на этот заголовок"></a></h1>
+<p>Пакет для отслеживания финансовых операций.</p>
+<p>Этот пакет предоставляет функционал для учета доходов и расходов,
+генерации отчетов и анализа финансовых данных.</p>
+<section id="id1">
+<h2>Подмодули<a class="headerlink" href="#id1" title="Ссылка на этот заголовок"></a></h2>
+</section>
+<section id="module-fintracker.models">
+<span id="fintracker-models"></span><h2>fintracker.models<a class="headerlink" href="#module-fintracker.models" title="Ссылка на этот заголовок"></a></h2>
+<p>Модуль с моделями данных для финансового трекера.</p>
+<p>Содержит классы для представления категорий и финансовых операций.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fintracker.models.Category">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fintracker.models.</span></span><span class="sig-name descname"><span class="pre">Category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fintracker/models.html#Category"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.models.Category" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Класс для представления категории финансовых операций.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fintracker.models.Category.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#fintracker.models.Category.name" title="Ссылка на это определение"></a></dt>
+<dd><p>Название категории.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fintracker.models.Category.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#fintracker.models.Category.type" title="Ссылка на это определение"></a></dt>
+<dd><p>Тип категории („expense“ или „income“).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Инициализирует категорию.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Название категории.</p></li>
+<li><p><strong>category_type</strong> (<em>str</em>) – Тип категории („expense“ или „income“).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fintracker.models.Category.from_dict">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#fintracker.models.Category" title="fintracker.models.Category"><span class="pre">Category</span></a></span></span><a class="reference internal" href="_modules/fintracker/models.html#Category.from_dict"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.models.Category.from_dict" title="Ссылка на это определение"></a></dt>
+<dd><p>Создает объект категории из словаря.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>dict</em>) – Словарь с данными категории.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Новый объект категории.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#fintracker.models.Category" title="fintracker.models.Category">Category</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fintracker.models.Category.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/fintracker/models.html#Category.to_dict"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.models.Category.to_dict" title="Ссылка на это определение"></a></dt>
+<dd><p>Преобразует объект категории в словарь.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Словарь с данными категории.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fintracker.models.Expense">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fintracker.models.</span></span><span class="sig-name descname"><span class="pre">Expense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fintracker/models.html#Expense"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.models.Expense" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Класс для представления финансовой операции.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fintracker.models.Expense.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#fintracker.models.Expense.category" title="Ссылка на это определение"></a></dt>
+<dd><p>Категория операции.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fintracker.models.Expense.amount">
+<span class="sig-name descname"><span class="pre">amount</span></span><a class="headerlink" href="#fintracker.models.Expense.amount" title="Ссылка на это определение"></a></dt>
+<dd><p>Сумма операции.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fintracker.models.Expense.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#fintracker.models.Expense.description" title="Ссылка на это определение"></a></dt>
+<dd><p>Описание операции.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fintracker.models.Expense.date">
+<span class="sig-name descname"><span class="pre">date</span></span><a class="headerlink" href="#fintracker.models.Expense.date" title="Ссылка на это определение"></a></dt>
+<dd><p>Дата и время операции.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Инициализирует финансовую операцию.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>category</strong> (<em>str</em>) – Категория операции.</p></li>
+<li><p><strong>amount</strong> (<em>float</em>) – Сумма операции.</p></li>
+<li><p><strong>description</strong> (<em>str</em><em>, </em><em>optional</em>) – Описание операции. По умолчанию «».</p></li>
+<li><p><strong>date</strong> (<em>str</em><em>, </em><em>optional</em>) – Дата операции. По умолчанию текущее время.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fintracker.models.Expense.from_dict">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#fintracker.models.Expense" title="fintracker.models.Expense"><span class="pre">Expense</span></a></span></span><a class="reference internal" href="_modules/fintracker/models.html#Expense.from_dict"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.models.Expense.from_dict" title="Ссылка на это определение"></a></dt>
+<dd><p>Создает объект операции из словаря.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>dict</em>) – Словарь с данными операции.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Новый объект операции.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#fintracker.models.Expense" title="fintracker.models.Expense">Expense</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fintracker.models.Expense.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/fintracker/models.html#Expense.to_dict"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.models.Expense.to_dict" title="Ссылка на это определение"></a></dt>
+<dd><p>Преобразует объект операции в словарь.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Словарь с данными операции.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fintracker.storage">
+<span id="fintracker-storage"></span><h2>fintracker.storage<a class="headerlink" href="#module-fintracker.storage" title="Ссылка на этот заголовок"></a></h2>
+<p>Модуль для работы с хранением данных.</p>
+<p>Обеспечивает сохранение и загрузку финансовых данных в JSON-файл.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.storage.add_category">
+<span class="sig-prename descclassname"><span class="pre">fintracker.storage.</span></span><span class="sig-name descname"><span class="pre">add_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/fintracker/storage.html#add_category"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.storage.add_category" title="Ссылка на это определение"></a></dt>
+<dd><p>Добавляет новую категорию.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Название категории.</p></li>
+<li><p><strong>cat_type</strong> (<em>str</em>) – Тип категории („expense“ или „income“).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>True если категория успешно добавлена, иначе False.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Если тип категории не „expense“ или „income“.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.storage.add_expense">
+<span class="sig-prename descclassname"><span class="pre">fintracker.storage.</span></span><span class="sig-name descname"><span class="pre">add_expense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/fintracker/storage.html#add_expense"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.storage.add_expense" title="Ссылка на это определение"></a></dt>
+<dd><p>Добавляет новую финансовую операцию.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>category</strong> (<em>str</em>) – Категория операции.</p></li>
+<li><p><strong>amount</strong> (<em>float</em>) – Сумма операции.</p></li>
+<li><p><strong>description</strong> (<em>str</em><em>, </em><em>optional</em>) – Описание операции. По умолчанию «».</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>True если операция успешно добавлена, иначе False.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.storage.get_categories">
+<span class="sig-prename descclassname"><span class="pre">fintracker.storage.</span></span><span class="sig-name descname"><span class="pre">get_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#fintracker.models.Category" title="fintracker.models.Category"><span class="pre">Category</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/fintracker/storage.html#get_categories"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.storage.get_categories" title="Ссылка на это определение"></a></dt>
+<dd><p>Получает список всех категорий.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Список объектов категорий.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[<a class="reference internal" href="#fintracker.models.Category" title="fintracker.models.Category">Category</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.storage.get_expenses">
+<span class="sig-prename descclassname"><span class="pre">fintracker.storage.</span></span><span class="sig-name descname"><span class="pre">get_expenses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/fintracker/storage.html#get_expenses"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.storage.get_expenses" title="Ссылка на это определение"></a></dt>
+<dd><p>Получает список операций за указанный период.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>period</strong> (<em>str</em><em>, </em><em>optional</em>) – Период для фильтрации.
+Допустимые значения: „today“, „month“, „all“. По умолчанию „all“.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Список операций за указанный период.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.storage.load_data">
+<span class="sig-prename descclassname"><span class="pre">fintracker.storage.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/fintracker/storage.html#load_data"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.storage.load_data" title="Ссылка на это определение"></a></dt>
+<dd><p>Загружает данные из JSON-файла.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Словарь с данными приложения.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<p>Если файл не существует, возвращает пустую структуру данных.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.storage.save_data">
+<span class="sig-prename descclassname"><span class="pre">fintracker.storage.</span></span><span class="sig-name descname"><span class="pre">save_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fintracker/storage.html#save_data"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.storage.save_data" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет данные в JSON-файл.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – Данные для сохранения.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-fintracker.commands">
+<span id="fintracker-commands"></span><h2>fintracker.commands<a class="headerlink" href="#module-fintracker.commands" title="Ссылка на этот заголовок"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.commands.handle_add">
+<span class="sig-prename descclassname"><span class="pre">fintracker.commands.</span></span><span class="sig-name descname"><span class="pre">handle_add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fintracker/commands.html#handle_add"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.commands.handle_add" title="Ссылка на это определение"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.commands.handle_category">
+<span class="sig-prename descclassname"><span class="pre">fintracker.commands.</span></span><span class="sig-name descname"><span class="pre">handle_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fintracker/commands.html#handle_category"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.commands.handle_category" title="Ссылка на это определение"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.commands.handle_list">
+<span class="sig-prename descclassname"><span class="pre">fintracker.commands.</span></span><span class="sig-name descname"><span class="pre">handle_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fintracker/commands.html#handle_list"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.commands.handle_list" title="Ссылка на это определение"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.commands.handle_report">
+<span class="sig-prename descclassname"><span class="pre">fintracker.commands.</span></span><span class="sig-name descname"><span class="pre">handle_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fintracker/commands.html#handle_report"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.commands.handle_report" title="Ссылка на это определение"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.commands.setup_commands">
+<span class="sig-prename descclassname"><span class="pre">fintracker.commands.</span></span><span class="sig-name descname"><span class="pre">setup_commands</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fintracker/commands.html#setup_commands"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.commands.setup_commands" title="Ссылка на это определение"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-fintracker.report">
+<span id="fintracker-report"></span><h2>fintracker.report<a class="headerlink" href="#module-fintracker.report" title="Ссылка на этот заголовок"></a></h2>
+<p>Модуль для генерации финансовых отчетов.</p>
+<p>Предоставляет функции для создания отчетов по категориям и периодам.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.report.generate_category_report">
+<span class="sig-prename descclassname"><span class="pre">fintracker.report.</span></span><span class="sig-name descname"><span class="pre">generate_category_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'month'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="reference internal" href="_modules/fintracker/report.html#generate_category_report"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.report.generate_category_report" title="Ссылка на это определение"></a></dt>
+<dd><p>Генерирует отчет по категориям за указанный период.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>period</strong> (<em>str</em><em>, </em><em>optional</em>) – Период для отчета.
+Допустимые значения: „today“, „month“, „all“. По умолчанию „month“.</p></li>
+<li><p><strong>output_file</strong> (<em>str</em><em>, </em><em>optional</em>) – Путь для сохранения отчета в CSV.
+По умолчанию None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Словарь с данными отчета.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.report.generate_period_report">
+<span class="sig-prename descclassname"><span class="pre">fintracker.report.</span></span><span class="sig-name descname"><span class="pre">generate_period_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="reference internal" href="_modules/fintracker/report.html#generate_period_report"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.report.generate_period_report" title="Ссылка на это определение"></a></dt>
+<dd><p>Генерирует отчет за указанный период времени.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_date</strong> (<em>str</em>) – Начальная дата в формате YYYY-MM-DD.</p></li>
+<li><p><strong>end_date</strong> (<em>str</em>) – Конечная дата в формате YYYY-MM-DD.</p></li>
+<li><p><strong>output_file</strong> (<em>str</em><em>, </em><em>optional</em>) – Путь для сохранения отчета в CSV.
+По умолчанию None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Словарь с данными отчета.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.report.print_report">
+<span class="sig-prename descclassname"><span class="pre">fintracker.report.</span></span><span class="sig-name descname"><span class="pre">print_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">report</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fintracker/report.html#print_report"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.report.print_report" title="Ссылка на это определение"></a></dt>
+<dd><p>Выводит отчет в консоль в читаемом формате.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>report</strong> (<em>Dict</em>) – Данные отчета для вывода.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fintracker.report.save_report_to_csv">
+<span class="sig-prename descclassname"><span class="pre">fintracker.report.</span></span><span class="sig-name descname"><span class="pre">save_report_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">report</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fintracker/report.html#save_report_to_csv"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#fintracker.report.save_report_to_csv" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет отчет в CSV файл.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>report</strong> (<em>Dict</em>) – Данные отчета.</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – Имя файла для сохранения.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>IOError</strong> – Если возникает ошибка при записи файла.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="modules.html" class="btn btn-neutral float-left" title="Модули проекта" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Руководство пользователя" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2025, Литвиненко Артем. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

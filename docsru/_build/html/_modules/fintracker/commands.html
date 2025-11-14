@@ -1,0 +1,218 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fintracker.commands &mdash; документация Financial Tracker 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=e35015f7"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=cd1d70c9"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Financial Tracker
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Модули проекта</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Руководство пользователя</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Financial Tracker</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Код модуля</a></li>
+      <li class="breadcrumb-item active">fintracker.commands</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Исходный код fintracker.commands</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">add_expense</span><span class="p">,</span> <span class="n">get_expenses</span><span class="p">,</span> <span class="n">add_category</span><span class="p">,</span> <span class="n">get_categories</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.report</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_category_report</span><span class="p">,</span> <span class="n">generate_period_report</span><span class="p">,</span> <span class="n">print_report</span>
+
+
+<div class="viewcode-block" id="handle_add">
+<a class="viewcode-back" href="../../fintracker.html#fintracker.commands.handle_add">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">handle_add</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="c1">#Обработка команды добавления операции</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="n">add_expense</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+            <span class="n">type_str</span> <span class="o">=</span> <span class="s2">&quot;расход&quot;</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;доход&quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Добавлен </span><span class="si">{</span><span class="n">type_str</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">category</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> руб.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">success</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ошибка: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="handle_list">
+<a class="viewcode-back" href="../../fintracker.html#fintracker.commands.handle_list">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">handle_list</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="c1">#Обработка команды просмотра операций</span>
+    <span class="n">expenses</span> <span class="o">=</span> <span class="n">get_expenses</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">period</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">expenses</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Нет операций за указанный период&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Список операций (</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">period</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">expense</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">expenses</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">sign</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span> <span class="k">if</span> <span class="n">expense</span><span class="o">.</span><span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;+&quot;</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">expense</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">expense</span><span class="o">.</span><span class="n">category</span><span class="si">:</span><span class="s2">15</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">sign</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">expense</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span><span class="si">:</span><span class="s2">8.2f</span><span class="si">}</span><span class="s2"> руб. | </span><span class="si">{</span><span class="n">expense</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">expense</span><span class="o">.</span><span class="n">amount</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Итого: </span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2"> руб.&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="handle_report">
+<a class="viewcode-back" href="../../fintracker.html#fintracker.commands.handle_report">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">handle_report</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="c1">#Обработка команды генерации отчета</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;category&quot;</span><span class="p">:</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="n">generate_category_report</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">period</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;period&quot;</span> <span class="ow">and</span> <span class="n">args</span><span class="o">.</span><span class="n">start</span> <span class="ow">and</span> <span class="n">args</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="n">generate_period_report</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Для отчета за период укажите --start и --end&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+        <span class="n">print_report</span><span class="p">(</span><span class="n">report</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="handle_category">
+<a class="viewcode-back" href="../../fintracker.html#fintracker.commands.handle_category">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">handle_category</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="c1">#Обработка команды работы с категориями</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;add&quot;</span><span class="p">:</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="n">add_category</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Добавлена категория: </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="n">get_categories</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">categories</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Нет категорий&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Список категорий:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">category</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">category</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="setup_commands">
+<a class="viewcode-back" href="../../fintracker.html#fintracker.commands.setup_commands">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_commands</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Финансовый трекер расходов&quot;</span><span class="p">)</span>
+    <span class="n">subparsers</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">(</span><span class="n">dest</span><span class="o">=</span><span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Доступные команды&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Команда добавления</span>
+    <span class="n">add_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Добавить операцию&quot;</span><span class="p">)</span>
+    <span class="n">add_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--category&quot;</span><span class="p">,</span> <span class="s2">&quot;-c&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Категория операции&quot;</span><span class="p">)</span>
+    <span class="n">add_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--amount&quot;</span><span class="p">,</span> <span class="s2">&quot;-a&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Сумма (отрицательная для расходов)&quot;</span><span class="p">)</span>
+    <span class="n">add_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--description&quot;</span><span class="p">,</span> <span class="s2">&quot;-d&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Описание операции&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Команда просмотра</span>
+    <span class="n">list_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;list&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Просмотреть операции&quot;</span><span class="p">)</span>
+    <span class="n">list_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--period&quot;</span><span class="p">,</span> <span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;today&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">],</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Период&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Команда отчетов</span>
+    <span class="n">report_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;report&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Сгенерировать отчет&quot;</span><span class="p">)</span>
+    <span class="n">report_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--type&quot;</span><span class="p">,</span> <span class="s2">&quot;-t&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="s2">&quot;period&quot;</span><span class="p">],</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Тип отчета&quot;</span><span class="p">)</span>
+    <span class="n">report_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--period&quot;</span><span class="p">,</span> <span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;today&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">],</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;month&quot;</span><span class="p">,</span>
+                               <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Период (для category)&quot;</span><span class="p">)</span>
+    <span class="n">report_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--start&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Начальная дата (YYYY-MM-DD) для period&quot;</span><span class="p">)</span>
+    <span class="n">report_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--end&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Конечная дата (YYYY-MM-DD) для period&quot;</span><span class="p">)</span>
+    <span class="n">report_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Файл для сохранения отчета (CSV)&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Команда категорий</span>
+    <span class="n">cat_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Управление категориями&quot;</span><span class="p">)</span>
+    <span class="n">cat_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;action&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;list&quot;</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Действие&quot;</span><span class="p">)</span>
+    <span class="n">cat_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--name&quot;</span><span class="p">,</span> <span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Название категории (для add)&quot;</span><span class="p">)</span>
+    <span class="n">cat_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--type&quot;</span><span class="p">,</span> <span class="s2">&quot;-t&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;expense&quot;</span><span class="p">,</span> <span class="s2">&quot;income&quot;</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Тип категории (для add)&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">parser</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2025, Литвиненко Артем. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

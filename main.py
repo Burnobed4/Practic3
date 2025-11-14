@@ -1,9 +1,12 @@
-import argparse
 import sys
 from fintracker.commands import setup_commands, handle_add, handle_list, handle_report, handle_category
 
 
 def main():
+    """Основная функция приложения.
+
+    Обрабатывает аргументы командной строки и вызывает соответствующие обработчики.
+    """
     parser = setup_commands()
     args = parser.parse_args()
 

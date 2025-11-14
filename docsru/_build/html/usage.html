@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Руководство пользователя &mdash; документация Financial Tracker 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e35015f7"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=cd1d70c9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="prev" title="Пакет fintracker" href="fintracker.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Financial Tracker
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Модули проекта</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Руководство пользователя</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#add">Команда add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list">Команда list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#report">Команда report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#category">Команда category</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Financial Tracker</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Руководство пользователя</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Руководство пользователя<a class="headerlink" href="#id1" title="Ссылка на этот заголовок"></a></h1>
+<section id="add">
+<h2>Команда add<a class="headerlink" href="#add" title="Ссылка на этот заголовок"></a></h2>
+<p>Добавляет новую финансовую операцию.</p>
+<p><strong>Синтаксис:</strong>:</p>
+<blockquote>
+<div><p>py main.py add –category CATEGORY –amount AMOUNT [–description TEXT]</p>
+</div></blockquote>
+<p><strong>Параметры:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--category,</span> <span class="pre">-c</span></code>: Категория операции (обязательный)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--amount,</span> <span class="pre">-a</span></code>: Сумма операции (обязательный, отрицательная для расходов)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--description,</span> <span class="pre">-d</span></code>: Описание операции (опциональный)</p></li>
+</ul>
+<p><strong>Примеры:</strong>:</p>
+<blockquote>
+<div><p># Добавление расхода
+py main.py add –category «еда» –amount -250 –description «Обед в кафе»</p>
+<p># Добавление дохода
+py main.py add –category «зарплата» –amount 50000 –description «Зарплата за месяц»</p>
+<p># Короткая версия
+py main.py add -c «транспорт» -a -50 -d «Метро»</p>
+</div></blockquote>
+</section>
+<section id="list">
+<h2>Команда list<a class="headerlink" href="#list" title="Ссылка на этот заголовок"></a></h2>
+<p>Просмотр операций за указанный период.</p>
+<p><strong>Синтаксис:</strong>:</p>
+<blockquote>
+<div><p>py main.py list [–period today|month|all]</p>
+</div></blockquote>
+<p><strong>Параметры:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--period,</span> <span class="pre">-p</span></code>: Период для фильтрации (по умолчанию: all)</p></li>
+</ul>
+<p><strong>Примеры:</strong>:</p>
+<blockquote>
+<div><p>py main.py list –period today
+py main.py list –period month
+py main.py list -p all</p>
+</div></blockquote>
+</section>
+<section id="report">
+<h2>Команда report<a class="headerlink" href="#report" title="Ссылка на этот заголовок"></a></h2>
+<p>Генерация финансовых отчетов.</p>
+<p><strong>Синтаксис:</strong>:</p>
+<blockquote>
+<div><p># Отчет по категориям
+py main.py report –type category [–period today|month|all] [–output FILE.csv]</p>
+<p># Отчет за период
+py main.py report –type period –start YYYY-MM-DD –end YYYY-MM-DD [–output FILE.csv]</p>
+</div></blockquote>
+<p><strong>Примеры:</strong>:</p>
+<blockquote>
+<div><p># Отчет по категориям за месяц
+py main.py report –type category –period month</p>
+<p># Отчет за период с сохранением в файл
+py main.py report –type period –start 2024-01-01 –end 2024-01-31 –output january_report.csv</p>
+</div></blockquote>
+</section>
+<section id="category">
+<h2>Команда category<a class="headerlink" href="#category" title="Ссылка на этот заголовок"></a></h2>
+<p>Управление категориями операций.</p>
+<p><strong>Синтаксис:</strong>:</p>
+<blockquote>
+<div><p># Добавление категории
+py main.py category add –name NAME –type expense|income</p>
+<p># Просмотр категорий
+py main.py category list</p>
+</div></blockquote>
+<p><strong>Примеры:</strong>:</p>
+<blockquote>
+<div><p>py main.py category add –name «транспорт» –type expense
+py main.py category add –name «зарплата» –type income
+py main.py category list</p>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="fintracker.html" class="btn btn-neutral float-left" title="Пакет fintracker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2025, Литвиненко Артем. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

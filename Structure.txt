@@ -5,5 +5,4 @@ fintracker/
     report.py
     commands.py
 main.py
-requirements.txt
 data.json
