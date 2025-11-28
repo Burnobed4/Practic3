@@ -1,5 +1,6 @@
 import sys
 from fintracker.commands import setup_commands, handle_add, handle_list, handle_report, handle_category
+from fintracker.storage import init_storage
 
 
 def main():
@@ -7,6 +8,9 @@ def main():
 
     Обрабатывает аргументы командной строки и вызывает соответствующие обработчики.
     """
+    # Инициализируем базу данных при запуске
+    init_storage()
+
     parser = setup_commands()
     args = parser.parse_args()
 

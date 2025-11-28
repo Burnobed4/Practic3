@@ -4,7 +4,7 @@ from .report import generate_category_report, generate_period_report, print_repo
 
 
 def handle_add(args):
-    #Обработка команды добавления операции
+    """Обработка команды добавления операции"""
     try:
         success = add_expense(args.category, args.amount, args.description)
         if success:
@@ -17,7 +17,7 @@ def handle_add(args):
 
 
 def handle_list(args):
-    #Обработка команды просмотра операций
+    """Обработка команды просмотра операций"""
     expenses = get_expenses(args.period)
 
     if not expenses:
@@ -38,7 +38,7 @@ def handle_list(args):
 
 
 def handle_report(args):
-    #Обработка команды генерации отчета
+    """Обработка команды генерации отчета"""
     if args.type == "category":
         report = generate_category_report(args.period, args.output)
     elif args.type == "period" and args.start and args.end:
@@ -52,7 +52,7 @@ def handle_report(args):
 
 
 def handle_category(args):
-    #Обработка команды работы с категориями
+    """Обработка команды работы с категориями"""
     if args.action == "add":
         success = add_category(args.name, args.type)
         if success:

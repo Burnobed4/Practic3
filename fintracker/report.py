@@ -4,9 +4,8 @@
 """
 
 import csv
-from datetime import datetime
-from typing import List, Dict
-from .storage import get_expenses, get_categories
+from typing import Dict
+from .database import get_category_report_from_db, get_period_report_from_db
 
 
 def generate_category_report(period: str = "month", output_file: str = None) -> Dict:
@@ -21,25 +20,8 @@ def generate_category_report(period: str = "month", output_file: str = None) -> 
     Returns:
         Dict: Словарь с данными отчета.
     """
-    expenses = get_expenses(period)
-
-    # Группируем по категориям
-    category_totals = {}
-    for expense in expenses:
-        if expense.category not in category_totals:
-            category_totals[expense.category] = 0
-        category_totals[expense.category] += expense.amount
-
-    # Сортируем по сумме (по убыванию)
-    sorted_categories = sorted(category_totals.items(), key=lambda x: x[1], reverse=True)
-
-    report = {
-        "period": period,
-        "total_expenses": len(expenses),
-        "total_amount": sum(exp.amount for exp in expenses),
-        "categories": sorted_categories,
-        "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    }
+    # Используем функцию из database.py для эффективной работы с БД
+    report = get_category_report_from_db(period)
 
     if output_file:
         save_report_to_csv(report, output_file)
@@ -59,30 +41,8 @@ def generate_period_report(start_date: str, end_date: str, output_file: str = No
     Returns:
         Dict: Словарь с данными отчета.
     """
-    all_expenses = get_expenses("all")
-
-    # Фильтруем по дате
-    filtered_expenses = []
-    for expense in all_expenses:
-        exp_date = expense.date.split()[0]  # Берем только дату без времени
-        if start_date <= exp_date <= end_date:
-            filtered_expenses.append(expense)
-
-    # Группируем по дням
-    daily_totals = {}
-    for expense in filtered_expenses:
-        date = expense.date.split()[0]
-        if date not in daily_totals:
-            daily_totals[date] = 0
-        daily_totals[date] += expense.amount
-
-    report = {
-        "period": f"{start_date} - {end_date}",
-        "total_expenses": len(filtered_expenses),
-        "total_amount": sum(exp.amount for exp in filtered_expenses),
-        "daily_totals": daily_totals,
-        "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    }
+    # Используем функцию из database.py для эффективной работы с БД
+    report = get_period_report_from_db(start_date, end_date)
 
     if output_file:
         save_report_to_csv(report, output_file)
